@@ -1,0 +1,33 @@
+MSE con Adam optimizer
+
+they downscale 130x100 
+
+Regression model :
+
+Our first model is a VGG-style CNN [19] with a regression output. This network
+represents a stack of six convolutional blocks with 32, 64, 128, 128, 256, 384
+filters followed by two fully connected layers of 2048 neurons each and a single
+output (see Fig. 5). The input size varies depending on the considered region
+of an image, Fig. 7. For better generalization, we apply dropout layers before
+the fully connected layers. For regression targets, we scale bone age in the range
+[−1, 1]. The network is trained by minimizing Mean Absolute Error (MAE):
+
+with Adam optimizer. We begin training with the learning rate 10^−3 and then
+progressively lower it to 10^−5
+. Due to a limited data set size, we use train time
+augmentation with zoom, rotation and shift to avoid overfitting.
+
+
+Classification model :
+
+The classification model (Fig. 5) is similar to the regression one, except for the
+two final layers. First, we assign each bone age a class. Bone ages expressed in
+months, hence, we assume 240 classes overall. The second to the last layer is a
+softmax layer with 240 outputs. This layer outputs vector of probabilities of 240
+classes. The probability of a class takes a real value in the range [0, 1]. In the final
+layer, the softmax layer is multiplied by a vector of distinct bone ages uniformly
+distributed over 240 integer values [0, 1, ..., 238, 239]. Thereby, the model outputs
+single value that corresponds to the expectation of the bone age. We train this
+model using the same protocol as the regression model.
+
+
