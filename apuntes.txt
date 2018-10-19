@@ -1,5 +1,6 @@
-MSE con Adam optimizer
+﻿MSE con Adam optimizer
 
+100x175 si reducimos la original
 they downscale 130x100 
 
 Regression model :
