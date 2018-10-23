@@ -6,11 +6,11 @@ import torch.utils.model_zoo as model_zoo
 
 
 class VGG(nn.Module):
-    def __init__(self, features, num_classes=1000, init_weights=True):
+    def __init__(self, num_classes=240, init_weights=True):
         super(VGG, self).__init__()
-        self.features = features
+        self.features = nn
         self.classifier = nn.Sequential(
-            nn.Linear(512 * 7 * 7, 4096),
+            nn.Linear(384 * 29 * 22, 4096),
             nn.ReLU(True),
             nn.Dropout(),
             nn.Linear(4096, 4096),
@@ -18,9 +18,21 @@ class VGG(nn.Module):
             nn.Dropout(),
             nn.Linear(4096, num_classes),
         )
+
         if init_weights:
             self._initialize_weights()
 
+    def vgg_block_kalinin(self, in_channels, out_channels):
+        block = [
+            nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1),
+            nn.ELU(),
+            nn.BatchNorm2d(out_channels),
+            nn.Conv2d(out_channels, out_channels, kernel_size=1, padding=1),
+            nn.ELU(),
+            nn.BatchNorm2d(out_channels),
+            nn.MaxPool2d(kernel_size=3, stride=2)
+        ]
+        return block
     def forward(self, x):
         x = self.features(x)
         x = x.view(x.size(0), -1)
@@ -92,16 +104,16 @@ def vgg_block_kalinin(in_channels, out_channels):
     ]
     return block
 
-def vgg_lineal_kalinin():
+def vgg_lineal_kalinin(output_size=2304):
     block = [
         # 244992 -> full img
         # 2304 -> resize y con padding de 1 en las 2 conv2d de arriba
-        nn.Linear(2304, 2048),
+        nn.Linear(output_size, 2048),
         nn.ELU(),
         nn.Dropout2d(0.5),
         nn.Linear(2048, 240),
-        nn.ELU(),
-        nn.Softmax(dim=1)
+        nn.ELU()
+        #nn.Softmax(dim=1)
     ]    
     return nn.Sequential(*block)
 

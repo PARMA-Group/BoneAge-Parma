@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#PBS -N test_kalinin
+
+#PBS -q gpu-n1h72
+
+#PBS -l nodes=tule-02.cnca:ppn=1
+
+#PBS -l walltime=02:00:00
+
+module load opencv/2.4.13.3
+
+module load cuda/8.0.61
+
+module load cudnn-8/6.0.21
+
+module load intelpython/3.5
+
+cd $PBS_O_WORKDIR
+
+python ~/Proyects/BoneAge/src/VGGKalinin.py
