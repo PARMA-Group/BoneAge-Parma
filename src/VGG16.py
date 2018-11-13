@@ -1,3 +1,4 @@
+import torch
 import torch.nn as nn
 import torch.utils.model_zoo as model_zoo
 import math
@@ -22,8 +23,8 @@ model_urls = {
 
 
 class VGG(nn.Module):
-
-    def __init__(self, features, num_classes=1000, init_weights=True):
+    # num_classes = 240 por el paper
+    def __init__(self, features, num_classes=240, init_weights=True):
         super(VGG, self).__init__()
         self.features = features
         self.classifier = nn.Sequential(
@@ -134,7 +135,7 @@ def vgg13_bn(pretrained=False, **kwargs):
     return model
 
 
-def vgg16(pretrained=False, **kwargs):
+def vgg16(pretrained=False, state_dict=None, **kwargs):
     """VGG 16-layer model (configuration "D")
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
@@ -142,8 +143,10 @@ def vgg16(pretrained=False, **kwargs):
     if pretrained:
         kwargs['init_weights'] = False
     model = VGG(make_layers(cfg['D']), **kwargs)
-    if pretrained:
+    if pretrained and state_dict==None:
         model.load_state_dict(model_zoo.load_url(model_urls['vgg16']))
+    else:
+        model.load_state_dict(torch.load(state_dict))
     return model
 
 
@@ -185,6 +188,8 @@ def vgg19_bn(pretrained=False, **kwargs):
         model.load_state_dict(model_zoo.load_url(model_urls['vgg19_bn']))
     return model
 
+"""
 vgg = vgg16(False)
 x = torch.ones((224,224), dtype=torch.float64, device=torch.device("cuda"))
 x = vgg(x)
+"""

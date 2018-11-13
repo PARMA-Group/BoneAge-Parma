@@ -1,0 +1,13 @@
+{
+    "path_to_images": "../datasets/dnlm_train/",
+    "path_to_train_csv": "../utils/male_train.csv",
+    "path_to_test_csv": "../utils/male_test.csv",
+    "path_to_weights": "../weights/torchvisionvgg16.pt",
+    "csv_performance_name": "male_performance.csv",
+    
+    "batch_size": 64,
+    "test_batch_size": 100,
+    "epochs": 100,
+    "lr": 0.001,
+    "momentum": 0.5
+}
