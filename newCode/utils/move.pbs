@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#PBS -N moving_images
+
+#PBS -q gpu-n1h72
+
+#PBS -l nodes=tule-02.cnca:ppn=1
+
+#PBS -l walltime=10:00:00
+
+module load intelpython/3.5
+
+cd $PBS_O_WORKDIR
+
+python ~/Proyects/BoneAge/utils/move_images.py

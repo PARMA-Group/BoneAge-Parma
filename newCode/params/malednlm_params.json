@@ -1,0 +1,22 @@
+{
+    "path_to_images": "../datasets/dnlm_train/",
+    "path_to_train_csv": "../utils/male_train.csv",
+    "path_to_test_csv": "../utils/male_test.csv",
+    "path_to_weights": "../weights/malednlm.pt",
+    "csv_performance_name": "malednlm_performance.csv",
+    
+    "batch_size": 64,
+    "test_batch_size": 100,
+    "epochs": 100,
+    "log_interval": 10,
+
+    "params":{
+        "lr": 0.001,
+        "betas": "(0.9, 0.999)",
+        "momentum": 0,
+        "eps": 1e-08,
+        "alpha": 0.99,
+        "weight_decay":0
+    }
+
+}
