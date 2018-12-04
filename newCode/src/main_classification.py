@@ -3,8 +3,7 @@ import torch.nn as nn
 from torchvision import transforms
 from torch.utils.data.dataset import Dataset
 from BoneDataset import BoneDataset224
-import VGG16
-import argparse
+
 import torch.nn.functional as F
 import torch.optim as optim
 from torch.autograd import Variable

@@ -14,7 +14,7 @@ def resnet18(state_dict):
 
     #if not pretrain:
     #    print("* SE CARGARON LOS PESOS *")        
-    #    model.load_state_dict(torch.load(state_dict))        
+    #    model.load_state_dict(torch.load(state_dict))
     return model
 
 
