@@ -1,28 +1,35 @@
-import _pickle as pickle
+import csv
 
-def read_content(name):
-    pickle_off = open(name,"rb")
-    emp = pickle.load(pickle_off)
-    lista = list(emp.keys())
-    print(lista)
-    print(len(emp[lista[0]]))
-    print(len(emp[lista[1]]))
-    pickle_off.close()
+dicc = {}
 
-a = [   "dnlm0f_prediction_results.p", 
-        "dnlm0m_prediction_results.p", 
-        "nodnlm0f_prediction_results.p",
-        "nodnlm0m_prediction_results.p"]
+with open('male_train.csv', newline='') as f:
+    reader = csv.reader(f)
+    next(reader)
+    for row in reader:
+        dicc[int(row[1])] = row[1]
 
 
-read_content("training_results.p")
-b = []
+with open('female_train.csv', newline='') as f:
+    reader = csv.reader(f)
+    next(reader)
+    for row in reader:
+        dicc[int(row[1])] = row[1]
 
-for i in b:
-    pickle_off = open(i,"rb")
-    emp = pickle.load(pickle_off)
-    lista = list(emp.keys())
-    print(lista)
-    print(emp[lista[0]])
-    print(emp[lista[1]])
-    pickle_off.close()
+l = list(dicc.keys())
+l.sort()
+print(l)
+
+
+
+def intersection():
+    import os
+    d1 = os.listdir("dnlm_test")
+    d2 = os.listdir("dnlm_train")
+
+    d3 = os.listdir("fitted_test")
+    d4 = os.listdir("registered_train")
+
+    if (d1==d2) and (d3==d4):
+        print("diferentes")
+    else:
+        print(len(set(d1).intersection(d2)))

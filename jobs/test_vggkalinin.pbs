@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#PBS -N test_kalinin
+#PBS -N A_Boneage
 
 #PBS -q gpu-n1h72
 
-#PBS -l nodes=tule-02.cnca:ppn=1
+#PBS -l nodes=tule-00.cnca:ppn=1
 
-#PBS -l walltime=02:00:00
+#PBS -l walltime=72:00:00
 
 module load opencv/2.4.13.3
 
@@ -18,4 +18,4 @@ module load intelpython/3.5
 
 cd $PBS_O_WORKDIR
 
-python ~/Proyects/BoneAge/src/VGGKalinin.py
+python ../new_src/run.py ../params/A_male_DNLM.json
